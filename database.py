@@ -1,8 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-
-URL_DATABASE='mysql+pymysql://root:Vinagre_2006@localhost:3306/app'
+from dotenv import load_dotenv
+import os
+load_dotenv()
+URL_DATABASE = os.getenv("DATABASE_URL")
 
 engine = create_engine(URL_DATABASE)
 
