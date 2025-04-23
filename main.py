@@ -260,8 +260,8 @@ def get_slots(barbeiro_id: int, data: date, db: Session = Depends(get_db)):
     ).all()
     if not horario:
         return []
-    
-    slots= gerar_slots_disponiveis(horario.__dict__,barbeiro_id, data,agendamentos)
+    if(data > datetime.now().date()):
+        slots= gerar_slots_disponiveis(horario.__dict__,barbeiro_id, data,agendamentos)
     return slots
 @app.get("/agendamentos/{user_id}")
 def get_agendamentos(user_id: int, db: Session = Depends(get_db)):
