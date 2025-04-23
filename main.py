@@ -268,3 +268,14 @@ def get_agendamentos(user_id: int, db: Session = Depends(get_db)):
     hoje = datetime.now().date()
     agendamentos = db.query(models.Agendamentos).filter(models.Agendamentos.user_id == user_id, models.Agendamentos.data_agendamento >= hoje).all()
     return agendamentos
+
+@app.delete("/agendamentos/{agendamento_id}")
+def delete_agendamento(agendamento_id: int, db: Session = Depends(get_db)):
+    agendamento = db.query(models.Agendamentos).filter(models.Agendamentos.id == agendamento_id).first()
+    if not agendamento:
+        raise HTTPException(status_code=404, detail="Agendamento não encontrado")
+    
+    db.delete(agendamento)
+    db.commit()
+    
+    return {"message": "Agendamento deletado com sucesso"}
