@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from dotenv import load_dotenv
 import os
 load_dotenv()
-URL_DATABASE = os.getenv("DATABASE_URL")
+URL_DATABASE = os.getenv("URL_DATABASE")
 
 engine = create_engine(URL_DATABASE)
 
